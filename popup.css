@@ -1,0 +1,69 @@
+body, body * {
+     font-family: Comfortaa;
+     font-size: 12px;
+}
+div.boxes{
+	width: 470px;
+}
+.vl {
+	float: left;
+	border-left: 2px solid green;
+	height: 500px;
+	position: absolute;
+	left: 50%;
+	top: 0;
+}
+.container {
+	width: 230px;
+	height: 50px;
+	text-align: center;
+}
+.header {
+	font-weight: bold;
+	font-style: italic;
+	font-size: 14px;
+	color: green;
+}
+#fiveP, #bid {
+	font-weight: bold;
+	text-align: left;
+	margin-left: 10px;
+}
+#dateDOW, #pub, #offers, #commission, #pubDOW, #offersDOW, #commissionDOW, #guarantee, #percentage, #price, #et{
+	font-weight: bold;
+	text-align: center;
+}
+#percentage{
+	color: white;
+}
+#fiveP, #bid{
+	color: gray;
+}
+#pubDOW{
+	font-weight: bold;
+}
+.leftbox {
+	float: left; 
+	width: 229px;
+	height: 230px;
+	text-align: center;
+}
+.rightbox {
+	float: right;
+	width: 229px;
+	height: 230px;
+
+}
+.lbox {
+	float: left; 
+	width: 115px;
+	text-align: right;
+}
+.rbox {
+	float: left;
+	width: 115px;
+}
+
+input{
+	text-align: center;
+} 	

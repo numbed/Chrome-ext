@@ -1,0 +1,22 @@
+{
+    "name": "UCDP ET Calc",
+    "description": "UCDP ET Calc",
+    "version": "1.1",
+    "manifest_version": 3,
+    "permissions": [
+		"activeTab",
+		"tabs"],
+    "host_permissions": [],
+
+    "action": {
+        "default_title": "UCDP ET Calc",
+        "default_icon": "icons/gavel-32.png",
+        "default_popup": "popup4.html"
+    },
+
+    "icons": {
+        "32": "icons/gavel-32.png",
+		"48": "icons/gavel-48.png"
+    }
+
+}
