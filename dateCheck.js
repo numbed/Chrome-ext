@@ -71,8 +71,10 @@ function calculateMoney() {
 
     if (result2 > 999) {
         result2 = Math.floor(result2 / 100) * 100; // round to the nearest hundred
-    } else {
+    } else if (result2 > 200 && result2 < 999 ){
         result2 = Math.floor(result2 / 10) * 10; // round to the nearest ten
+    } else {
+        result2 = Math.floor(result2/1)*1;
     }
 
     document.getElementById('bid').textContent = result1.toFixed(2);
