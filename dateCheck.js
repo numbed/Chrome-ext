@@ -1,8 +1,8 @@
 document.getElementById("date").addEventListener("change", displayDate);
-document.getElementById("price").addEventListener("change", calcBid);
+document.getElementById("price").addEventListener("change", calculateMoney);
 document.getElementById("price").addEventListener("keypress", function (e) {
     if (e.key === 'Enter') {
-        calcBid();
+        calculateMoney();
     }
 });
 document.getElementById("guarantee").addEventListener("change", percDiff);
@@ -45,8 +45,8 @@ function showTP() {
         });
     }
 }
-	
-	
+
+
 function showET() {
     let et = document.getElementById("et").value;
     if (et != "" && document.getElementById("proc").checked) {
@@ -62,23 +62,22 @@ function showET() {
     }
 }
 
-function calcBid() {
-    document.getElementById("percentage").innerHTML = "";
 
-    let price = parseFloat(document.getElementById("price").value);
-    let bid = (price / 100) * 1;
-    document.getElementById("bid").innerHTML = bid.toFixed(2);
+function calculateMoney() {
+    var moneyInput = document.getElementById('price').value;
+    var result1 = moneyInput * 0.01; // 1% of the input value
+    var result2 = Math.min(moneyInput * 0.05, moneyInput);
+    var result3 = moneyInput * 0.05;
 
-    let g = (price / 100) * 5;
-    let guarantee = Math.round(g / 100) * 100;
-    if (guarantee > g) {
-        guarantee -= 100;
+    if (result2 > 999) {
+        result2 = Math.floor(result2 / 100) * 100; // round to the nearest hundred
+    } else {
+        result2 = Math.floor(result2 / 10) * 10; // round to the nearest ten
     }
 
-    document.getElementById("guarantee").value = guarantee;
-    document.getElementById("fiveP").innerHTML = "5%: " + g.toFixed(2);
-    percDiff();
-
+    document.getElementById('bid').textContent = result1.toFixed(2);
+    document.getElementById('guarantee').value = result2.toFixed(2);
+    document.getElementById('fiveP').textContent = result3.toFixed(2);
 }
 
 function percDiff() {
