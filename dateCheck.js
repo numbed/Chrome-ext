@@ -45,8 +45,8 @@ function showTP() {
         });
     }
 }
-
-
+	
+	
 function showET() {
     let et = document.getElementById("et").value;
     if (et != "" && document.getElementById("proc").checked) {
@@ -78,6 +78,7 @@ function calculateMoney() {
     document.getElementById('bid').textContent = result1.toFixed(2);
     document.getElementById('guarantee').value = result2.toFixed(2);
     document.getElementById('fiveP').textContent = result3.toFixed(2);
+    percDiff();
 }
 
 function percDiff() {
