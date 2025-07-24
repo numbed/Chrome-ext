@@ -1,23 +1,17 @@
 document.getElementById("date").addEventListener("change", displayDate);
-document.getElementById("price").addEventListener("change", calculateMoney);
-document.getElementById("price").addEventListener("keypress", function (e) {
+document.getElementById("priceBGN").addEventListener("change", calculateMoney);
+document.getElementById("priceEUR").addEventListener("change", calculateMoney);
+document.getElementById("priceBGN").addEventListener("keypress", function (e) {
     if (e.key === 'Enter') {
         calculateMoney();
     }
 });
-document.getElementById("guarantee").addEventListener("change", percDiff);
-document.getElementById("guarantee").addEventListener("keypress", function (e) {
+document.getElementById("guaranteeBGN").addEventListener("change", percDiff);
+document.getElementById("guaranteeBGN").addEventListener("keypress", function (e) {
     if (e.key === 'Enter') {
         percDiff();
     }
 });
-document.getElementById("b1").addEventListener("click", showET);
-document.getElementById("et").addEventListener("keypress", function (e) {
-    if (e.key === 'Enter') {
-        showET();
-    }
-});
-document.getElementById("b2").addEventListener("click", showTP);
 
 //document.getElementById("errCheck").addEventListener("click", duplicateCheck);
 
@@ -64,36 +58,68 @@ function showET() {
 
 
 function calculateMoney() {
-    var moneyInput = document.getElementById('price').value;
-    var result1 = moneyInput * 0.01; // 1% of the input value
-    var result2 = Math.min(moneyInput * 0.05, moneyInput);
-    var result3 = moneyInput * 0.05;
+    var moneyInput = document.getElementById('priceBGN').value;
+    var bidBGN = moneyInput * 0.01; // 1% of the input value
+    var guaranteeBGN = Math.min(moneyInput * 0.05, moneyInput);
+    var fivePBGN = moneyInput * 0.05;
 
-    if (result2 > 999) {
-        result2 = Math.floor(result2 / 100) * 100; // round to the nearest hundred
-    } else if (result2 > 200 && result2 < 999 ){
-        result2 = Math.floor(result2 / 10) * 10; // round to the nearest ten
+    if (guaranteeBGN > 999) {
+        guaranteeBGN = Math.floor(guaranteeBGN / 100) * 100; // round to the nearest hundred
+    } else if (guaranteeBGN > 200 && guaranteeBGN < 999 ){
+        guaranteeBGN = Math.floor(guaranteeBGN / 10) * 10; // round to the nearest ten
     } else {
-        result2 = Math.floor(result2/1)*1;
+        guaranteeBGN = Math.floor(guaranteeBGN/1)*1;
     }
 
-    document.getElementById('bid').textContent = result1.toFixed(2);
-    document.getElementById('guarantee').value = result2.toFixed(2);
-    document.getElementById('fiveP').textContent = result3.toFixed(2);
+
+    let exchangeRate = 1.95583; // Example exchange rate, adjust as needed
+    let priceEUR = (moneyInput / exchangeRate);
+
+    document.getElementById("priceEUR").value = priceEUR.toFixed(2);
+    var bidEUR = priceEUR * 0.01; // 1% of the input value
+    var guaranteeEUR = Math.min(priceEUR * 0.05, priceEUR);
+    var fivePEUR = priceEUR * 0.05;
+
+    if (guaranteeEUR > 999) {
+        guaranteeEUR = Math.floor(guaranteeEUR / 100) * 100; // round to the nearest hundred
+    } else if (guaranteeBGN > 200 && guaranteeEUR < 999 ){
+        guaranteeEUR = Math.floor(guaranteeEUR / 10) * 10; // round to the nearest ten
+    } else {
+        guaranteeEUR = Math.floor(guaranteeEUR/1)*1;
+    }
+
+    document.getElementById('bidBGN').textContent = bidBGN.toFixed(2);
+    document.getElementById('bidEUR').textContent = bidEUR.toFixed(2);
+    document.getElementById('guaranteeBGN').value = guaranteeBGN.toFixed(2);
+    document.getElementById('guaranteeEUR').value = guaranteeEUR.toFixed(2);
+    document.getElementById('fivePBGN').textContent = fivePBGN.toFixed(2);
+    document.getElementById('fivePEUR').textContent = fivePEUR.toFixed(2);
+  console.log('🚀 ~ calculateMoney ~ priceEUR: LOADED\n', priceEUR.toFixed(2));
     percDiff();
 }
 
 function percDiff() {
-    document.getElementById("percentage").style.backgroundColor = "";
+    document.getElementById("percentageBGN").style.backgroundColor = "";
 
-    let price = parseFloat(document.getElementById("price").value);
-    let g2 = parseInt(document.getElementById("guarantee").value);
-    let percDiff = ((g2 / price) * 100).toFixed(3);
-    document.getElementById("percentage").innerHTML = percDiff + "%";
-    if (percDiff > 5) {
-        document.getElementById("percentage").style.backgroundColor = "red";
-    } else if (percDiff <= 5) {
-        document.getElementById("percentage").style.backgroundColor = "green";
+    let priceBGN = parseFloat(document.getElementById("priceBGN").value);
+    let g2 = parseInt(document.getElementById("guaranteeBGN").value);
+    let percDiffBGN = ((g2 / priceBGN) * 100).toFixed(3);
+    console.log('🚀 ~ percDiff ~ percDiffBGN: LOADED\n', percDiffBGN + "%");
+    document.getElementById("percentageBGN").innerHTML = " (" + percDiffBGN + "% )";
+    if (percDiffBGN > 5) {
+        document.getElementById("guaranteeBGN").style.backgroundColor = "red";
+    } else if (percDiffBGN <= 5) {
+        document.getElementById("guaranteeBGN").style.backgroundColor = "green";
+    }
+
+    let priceEUR= parseFloat(document.getElementById("priceEUR").value);
+    let g2EUR = parseInt(document.getElementById("guaranteeEUR").value);
+    let percDiffEUR = ((g2EUR / priceEUR) * 100).toFixed(3);
+    document.getElementById("percentageEUR").innerHTML =" (" + percDiffEUR + "% )";
+    if (percDiffEUR > 5) {
+        document.getElementById("guaranteeEUR").style.backgroundColor = "red";
+    } else if (percDiffEUR <= 5) {
+        document.getElementById("guaranteeEUR").style.backgroundColor = "green";
     }
 }
 
@@ -187,66 +213,3 @@ function displayDate() {
 
     }
 }
-
-//work in progress below
-
-/*
-
-function duplicateCheck() {
-var tableET = document.querySelector("tbody");
-const infoET = {};
-const arrayET = [];
-const testArray = [];
-for (var i = 0, row; row = tableET.rows[i]; i++) {
-var myTPSplit = row.cells[5].innerText.split("/");
-myTPSplit = myTPSplit[0].trim().split(" ").pop();
-infoET[i] = {
-number: row.cells[0].innerText,
-date: row.cells[2].innerText,
-type: typeCheck(row.cells[4].innerText),
-subject: subjectCheck(row.cells[4].innerText),
-TP: myTPSplit
-};
-arrayET.push(infoET[i]);
-}
-console.log("TEMP");
-for (var i = 0; i < arrayET.length; i++) {
-for (var j = 0; j < arrayET.length; j++) {
-if (i !== j) {
-if (arrayET[i].date === arrayET[j].date) {
-testArray.push(arrayET[i].date + " - " + arrayET[i].TP + "  " + arrayET[i].number + " | " + arrayET[j].TP + "  " + arrayET[j].number);
-}
-}
-}
-}
-if (testArray.length !== 0) {
-console.log(testArray.join('\r\n'));
-alert(testArray.join('\r\n'));
-}
-console.log("TEMP");
-function subjectCheck(s) {
-var output;
-if (s.includes("действително")) {
-output = "ДД";
-} else if (s.includes("корен")) {
-output = "K";
-} else if (s.includes("прогнозни")) {
-output = "П";
-}
-return output;
-}
-function typeCheck(t) {
-var output;
-if (t.includes("конкурс")) {
-output = "к";
-} else if (t.includes("наддаване")) {
-output = "т";
-} else if (t.includes("ценово")) {
-output = "ецп";
-}
-return output;
-}
-}
-
-
-*/

@@ -24,20 +24,18 @@ div.boxes{
 	font-size: 14px;
 	color: green;
 }
-#fiveP, #bid {
+#fivePBGN, #fivePEUR, #bidBGN, #bidEUR {
 	font-weight: bold;
 	text-align: left;
 	margin-left: 10px;
+	color: gray;
 }
-#dateDOW, #pub, #offers, #commission, #pubDOW, #offersDOW, #commissionDOW, #guarantee, #percentage, #price, #et{
+#dateDOW, #pub, #offers, #commission, #pubDOW, #offersDOW, #commissionDOW, #guaranteeBGN, #percentageBGN, #priceEUR,#guaranteeEUR, #percentageEUR, #priceBGN, #et{
 	font-weight: bold;
 	text-align: center;
 }
-#percentage{
-	color: white;
-}
-#fiveP, #bid{
-	color: gray;
+#percentageBGN, #percentageEUR{
+	color: black;
 }
 #pubDOW{
 	font-weight: bold;
