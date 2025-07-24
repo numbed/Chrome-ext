@@ -1,13 +1,20 @@
 document.getElementById("date").addEventListener("change", displayDate);
 document.getElementById("priceBGN").addEventListener("change", calculateMoney);
-document.getElementById("priceEUR").addEventListener("change", calculateMoney);
+document.getElementById("priceEUR").addEventListener("change", bgnToEUR);
 document.getElementById("priceBGN").addEventListener("keypress", function (e) {
     if (e.key === 'Enter') {
         calculateMoney();
     }
 });
+
 document.getElementById("guaranteeBGN").addEventListener("change", percDiff);
+document.getElementById("guaranteeEUR").addEventListener("change", percDiff);
 document.getElementById("guaranteeBGN").addEventListener("keypress", function (e) {
+    if (e.key === 'Enter') {
+        percDiff();
+    }
+});
+document.getElementById("guaranteeEUR").addEventListener("keypress", function (e) {
     if (e.key === 'Enter') {
         percDiff();
     }
@@ -121,6 +128,15 @@ function percDiff() {
     } else if (percDiffEUR <= 5) {
         document.getElementById("guaranteeEUR").style.backgroundColor = "green";
     }
+}
+
+
+function bgnToEUR() {
+    let priceEUR = parseFloat(document.getElementById("priceEUR").value);
+    let exchangeRate = 1.95583; // Example exchange rate, adjust as needed
+    let priceBGN = (priceEUR * exchangeRate).toFixed(2);
+    document.getElementById("priceBGN").value = priceBGN;
+    calculateMoney();  
 }
 
 function radioCheck() {
