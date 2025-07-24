@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+   <head>
+      <link rel="stylesheet" href="popup.css">
+      <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+   </head>
+   <body>
+      <div class="boxes">
+         <div class="leftbox">
+            <div class="container">
+               <div class="header">Дата на провеждане:</div>
+               <input type="date" id="date"/>
+               <div id="dateDOW"></div>
+            </div>
+            <div class="container">
+               <hr>
+               <div class="header">Срок за публикуване:</div>
+               <div id="pub"></div>
+               <div id="pubDOW"></div>
+            </div>
+            <div class="container">
+               <hr>
+               <div class="header">Срок за подаване на оферти:</div>
+               <div id="offers"></div>
+               <div id="offersDOW"></div>
+            </div>
+            <div class="container">
+               <hr>
+               <div class="header">Заседание на комисията:</div>
+               <div id="commission"></div>
+               <div id="commissionDOW"></div>
+            </div>
+         </div>
+      </div>
+      </div>
+   </body>
+</html>
+<script src="dayjs.bg.min.js"></script>
+<script src="dateCheck.js" ></script>

@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="popup.css">
+		<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<div class="boxes">
+			<div class="leftbox">
+				<div class="container">
+					<div class="header">Дата на провеждане:</div>
+					<input type="date" id="date"/>
+					<div id="dateDOW"></div>
+				</div>
+				<div class="container">
+					<hr>
+					<div class="header">Срок за публикуване:</div>
+					<div id="pub"></div>
+					<div id="pubDOW"></div>
+				</div>
+				<div class="container">
+					<hr>
+					<div class="header">Срок за подаване на оферти:</div>
+					<div id="offers"></div>
+					<div id="offersDOW"></div>
+				</div>
+				<div class="container">
+					<hr>
+					<div class="header">Заседание на комисията:</div>
+					<div id="commission"></div>
+					<div id="commissionDOW"></div>
+				</div>
+			</div>
+			<div class="vl"></div>
+			<div class="rightbox">
+				<div class="container">
+					<div class="header">Първоначална цена:</div>
+					<input type="text" id="price" autofocus/>
+					<div id="showPrice"></div>
+					<div class="lbox">
+						<div class="header">Стъпка:</div>
+					</div>
+					<div class="rbox">
+						<div id="bid"></div>
+					</div>
+				</div>
+
+				<div class="container">
+					<hr>
+					<div class="lbox">
+						<div class="header">Гаранция:</div>
+					</div>
+					<div class="rbox">
+						<div id="fiveP"></div>
+					</div>
+					<input type="text" id="guarantee"/>
+					<div id="percentage"></div>
+					<br>
+				</div>	
+				<div class="container">
+					<hr>
+					<div class="header">ET:
+						<input type="text" id="et" size="5" />
+					</div>
+					<form>
+						<input type="radio" id="proc" name="group1" checked><label for="proc">Процедура</label>
+						<input type="radio" id="ref" name="group1"><label for="ref">Справка</label>
+						<input type="button" id="b1" value="Виж" title="ТЕСТ"/>
+					</form>
+				</div>
+				<div class="container">
+					<hr>
+					<div class="header">ДГС/ДЛС:</div>
+					<div>
+						<select name="bid" class="form-control" id="branchesList">
+							<option value="" selected="selected">- - -</option>
+							<option value="37">ДГС Акад. Николай Хайтов</option>
+							<option value="1">ДГС Алабак</option>
+							<option value="2">ДГС Ардино</option>
+							<option value="3">ДГС Асеновград</option>
+							<option value="4">ДГС Батак</option>
+							<option value="5">ДГС Борино</option>
+							<option value="6">ДГС Доспат</option>
+							<option value="7">ДГС Златоград</option>
+							<option value="8">ДГС Карлово</option>
+							<option value="9">ДГС Кирково</option>
+							<option value="10">ДГС Клисура</option>
+							<option value="11">ДГС Крумовград</option>
+							<option value="12">ДГС Михалково</option>
+							<option value="13">ДГС Момчилград</option>
+							<option value="14">ДГС Пазарджик</option>
+							<option value="15">ДГС Панагюрище</option>
+							<option value="16">ДГС Пещера</option>
+							<option value="17">ДГС Пловдив</option>
+							<option value="18">ДГС Първомай</option>
+							<option value="19">ДГС Ракитово</option>
+							<option value="20">ДГС Родопи</option>
+							<option value="21">ДГС Селище</option>
+							<option value="22">ДГС Славейно</option>
+							<option value="23">ДГС Смилян</option>
+							<option value="24">ДГС Смолян</option>
+							<option value="25">ДГС Триград</option>
+							<option value="26">ДГС Хвойна (до.30.10.2019)</option>
+							<option value="27">ДГС Хисар</option>
+							<option value="28">ДГС Широка лъка</option>
+							<option value="29">ДЛС Борово</option>
+							<option value="30">ДЛС Женда</option>
+							<option value="31">ДЛС Извора</option>
+							<option value="32">ДЛС Кормисош</option>
+							<option value="33">ДЛС Тракия</option>
+							<option value="34">ДЛС Чепино</option>
+							<option value="35">ДЛС Широка поляна</option>
+							<option value="36">Централно управление</option>
+						</select>
+					</div>
+					<form>
+						<input type="radio" id="procTP" name="group2" checked><label for="procTP">Процедура</label>
+						<input type="radio" id="refTP" name="group2"><label for="refTP">Справка</label>
+						<input type="button" id="b2" value="Виж" title="ТЕСТ"/>
+						<input type="button" id="errCheck" value="eCH" title="ТЕСТ"/>
+					</form>
+				</div>	
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script src="dayjs.bg.min.js"></script>
+<script src="dayjs.en.js"></script>
+<script src="dateCheck.js" ></script>
