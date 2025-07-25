@@ -1,6 +1,7 @@
 document.getElementById("date").addEventListener("change", displayDate);
 document.getElementById("priceBGN").addEventListener("change", calculateMoney);
-document.getElementById("priceEUR").addEventListener("change", bgnToEUR);
+document.getElementById("priceEUR").addEventListener("change", calculateEUR);
+// document.getElementById("priceEUR").addEventListener("change", bgnToEUR);
 document.getElementById("priceBGN").addEventListener("keypress", function (e) {
     if (e.key === 'Enter') {
         calculateMoney();
@@ -63,7 +64,6 @@ function showET() {
     }
 }
 
-
 function calculateMoney() {
     var moneyInput = document.getElementById('priceBGN').value;
     var bidBGN = moneyInput * 0.01; // 1% of the input value
@@ -102,6 +102,27 @@ function calculateMoney() {
     document.getElementById('fivePBGN').textContent = fivePBGN.toFixed(2);
     document.getElementById('fivePEUR').textContent = fivePEUR.toFixed(2);
   console.log('🚀 ~ calculateMoney ~ priceEUR: LOADED\n', priceEUR.toFixed(2));
+    percDiff();
+}
+
+function calculateEUR() {
+    var priceEUR = document.getElementById('priceEUR').value;
+
+    var bidEUR = priceEUR * 0.01; // 1% of the input value
+    var guaranteeEUR = Math.min(priceEUR * 0.05, priceEUR);
+    var fivePEUR = priceEUR * 0.05;
+
+    if (guaranteeEUR > 999) {
+        guaranteeEUR = Math.floor(guaranteeEUR / 100) * 100; // round to the nearest hundred
+    } else if (guaranteeBGN > 200 && guaranteeEUR < 999 ){
+        guaranteeEUR = Math.floor(guaranteeEUR / 10) * 10; // round to the nearest ten
+    } else {
+        guaranteeEUR = Math.floor(guaranteeEUR/1)*1;
+    }
+
+    document.getElementById('bidEUR').textContent = bidEUR.toFixed(2);
+    document.getElementById('guaranteeEUR').value = guaranteeEUR.toFixed(2);
+    document.getElementById('fivePEUR').textContent = fivePEUR.toFixed(2);
     percDiff();
 }
 
