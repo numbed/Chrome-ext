@@ -78,30 +78,14 @@ function calculateMoney() {
         guaranteeBGN = Math.floor(guaranteeBGN/1)*1;
     }
 
+    document.getElementById('bidBGN').textContent = bidBGN.toFixed(2);
+    document.getElementById('guaranteeBGN').value = guaranteeBGN.toFixed(2);
+    document.getElementById('fivePBGN').textContent = fivePBGN.toFixed(2);
 
     let exchangeRate = 1.95583; // Example exchange rate, adjust as needed
     let priceEUR = (moneyInput / exchangeRate);
-
     document.getElementById("priceEUR").value = priceEUR.toFixed(2);
-    var bidEUR = priceEUR * 0.01; // 1% of the input value
-    var guaranteeEUR = Math.min(priceEUR * 0.05, priceEUR);
-    var fivePEUR = priceEUR * 0.05;
-
-    if (guaranteeEUR > 999) {
-        guaranteeEUR = Math.floor(guaranteeEUR / 100) * 100; // round to the nearest hundred
-    } else if (guaranteeBGN > 200 && guaranteeEUR < 999 ){
-        guaranteeEUR = Math.floor(guaranteeEUR / 10) * 10; // round to the nearest ten
-    } else {
-        guaranteeEUR = Math.floor(guaranteeEUR/1)*1;
-    }
-
-    document.getElementById('bidBGN').textContent = bidBGN.toFixed(2);
-    document.getElementById('bidEUR').textContent = bidEUR.toFixed(2);
-    document.getElementById('guaranteeBGN').value = guaranteeBGN.toFixed(2);
-    document.getElementById('guaranteeEUR').value = guaranteeEUR.toFixed(2);
-    document.getElementById('fivePBGN').textContent = fivePBGN.toFixed(2);
-    document.getElementById('fivePEUR').textContent = fivePEUR.toFixed(2);
-  console.log('🚀 ~ calculateMoney ~ priceEUR: LOADED\n', priceEUR.toFixed(2));
+    calculateEUR();
     percDiff();
 }
 
