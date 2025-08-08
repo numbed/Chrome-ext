@@ -98,7 +98,7 @@ function calculateEUR() {
 
     if (guaranteeEUR > 999) {
         guaranteeEUR = Math.floor(guaranteeEUR / 100) * 100; // round to the nearest hundred
-    } else if (guaranteeBGN > 200 && guaranteeEUR < 999 ){
+    } else if (guaranteeEUR > 200 && guaranteeEUR < 999 ){
         guaranteeEUR = Math.floor(guaranteeEUR / 10) * 10; // round to the nearest ten
     } else {
         guaranteeEUR = Math.floor(guaranteeEUR/1)*1;
