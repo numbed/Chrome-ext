@@ -66,7 +66,7 @@ function showET() {
 
 function calculateMoney() {
     var moneyInput = document.getElementById('priceBGN').value;
-    var bidBGN = moneyInput * 0.01; // 1% of the input value
+    var bidBGN = (moneyInput * 0.01).toFixed(2); // 1% of the input value
     var guaranteeBGN = Math.min(moneyInput * 0.05, moneyInput);
     var fivePBGN = moneyInput * 0.05;
 
@@ -78,34 +78,39 @@ function calculateMoney() {
         guaranteeBGN = Math.floor(guaranteeBGN/1)*1;
     }
 
-    document.getElementById('bidBGN').textContent = bidBGN.toFixed(2);
-    document.getElementById('guaranteeBGN').value = guaranteeBGN.toFixed(2);
+    document.getElementById('bidBGN').textContent = bidBGN;
+    document.getElementById('guaranteeBGN').value = guaranteeBGN;
     document.getElementById('fivePBGN').textContent = fivePBGN.toFixed(2);
+    console.log('🚀 ~ calculateMoney ~ bidBGN: LOADED\n', bidBGN);
+    console.log('🚀 ~ calculateMoney ~ guaranteeBGN: LOADED\n', guaranteeBGN);
 
     let exchangeRate = 1.95583; // Example exchange rate, adjust as needed
     let priceEUR = (moneyInput / exchangeRate);
     document.getElementById("priceEUR").value = priceEUR.toFixed(2);
-    calculateEUR();
+    calculateEUR(bidBGN, guaranteeBGN);
     percDiff();
 }
 
-function calculateEUR() {
+function calculateEUR(bidBGN, guaranteeBGN) {
     var priceEUR = document.getElementById('priceEUR').value;
 
-    var bidEUR = priceEUR * 0.01; // 1% of the input value
-    var guaranteeEUR = Math.min(priceEUR * 0.05, priceEUR);
+    var bidEUR = (parseFloat(bidBGN) / 1.95583).toFixed(2); // 1% of the input value
+    console.log('🚀 ~ calculateEUR ~ bidEUR: LOADED\n', bidEUR);
+    // var guaranteeEUR = Math.min((parseFloat(guaranteeBGN)/1.95583).toFixed(2), parseFloat(guaranteeBGN)/1.95583);
+    var guaranteeEUR = (parseFloat(guaranteeBGN)/1.95583).toFixed(2);
+    console.log('🚀 ~ calculateEUR ~ guaranteeEUR: LOADED\n', guaranteeEUR);
     var fivePEUR = priceEUR * 0.05;
 
-    if (guaranteeEUR > 999) {
-        guaranteeEUR = Math.floor(guaranteeEUR / 100) * 100; // round to the nearest hundred
-    } else if (guaranteeEUR > 200 && guaranteeEUR < 999 ){
-        guaranteeEUR = Math.floor(guaranteeEUR / 10) * 10; // round to the nearest ten
-    } else {
-        guaranteeEUR = Math.floor(guaranteeEUR/1)*1;
-    }
+    // if (guaranteeEUR > 999) {
+    //     guaranteeEUR = Math.floor(guaranteeEUR / 100) * 100; // round to the nearest hundred
+    // } else if (guaranteeEUR > 200 && guaranteeEUR < 999 ){
+    //     guaranteeEUR = Math.floor(guaranteeEUR / 10) * 10; // round to the nearest ten
+    // } else {
+    //     guaranteeEUR = Math.floor(guaranteeEUR/1)*1;
+    // }
 
-    document.getElementById('bidEUR').textContent = bidEUR.toFixed(2);
-    document.getElementById('guaranteeEUR').value = guaranteeEUR.toFixed(2);
+    document.getElementById('bidEUR').textContent = bidEUR;
+    document.getElementById('guaranteeEUR').value = guaranteeEUR;
     document.getElementById('fivePEUR').textContent = fivePEUR.toFixed(2);
     percDiff();
 }
