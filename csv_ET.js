@@ -177,7 +177,7 @@
         if (name !== "data[woodInfo][type][0][]") {
             const el = document.getElementsByName(name)[0];
             if (el) el.value = data[index + 5];
-            if (name === "data[woodInfo][total][0]") el.value = woodsTotal; // Skip wood number field
+            if (name === "data[woodInfo][total][0]") el.value = woodsTotal.toFixed(20); // Skip wood number field
         }
     });
 
@@ -198,24 +198,22 @@
     // Click buttons to trigger frontend behavior
     document.querySelectorAll(".form-group.has-feedback button").forEach(el => el.click());
 
-
-
     // Click green save button
-    //   document.querySelector("button.btn.btn-success").click();
+      document.querySelector("button.btn.btn-success").click();
 
     // After delay, go to next auction ID
-    // setTimeout(() => {
-    //     const currentUrl = window.location.href;
-    //     const parts = currentUrl.split("/");
-    //     const lastPart = parts.pop() || parts.pop();
-    //     const lastNumber = parseInt(lastPart, 10);
+    setTimeout(() => {
+        const currentUrl = window.location.href;
+        const parts = currentUrl.split("/");
+        const lastPart = parts.pop() || parts.pop();
+        const lastNumber = parseInt(lastPart, 10);
 
-    //     if (!isNaN(lastNumber)) {
-    //         parts.push(lastNumber + 1);
-    //         const nextUrl = parts.join("/");
-    //         window.location.href = nextUrl;
-    //     } else {
-    //         alert("Could not detect a numeric ID at the end of the URL.");
-    //     }
-    // }, 200);
+        if (!isNaN(lastNumber)) {
+            parts.push(lastNumber + 1);
+            const nextUrl = parts.join("/");
+            window.location.href = nextUrl;
+        } else {
+            alert("Could not detect a numeric ID at the end of the URL.");
+        }
+    }, 200);
 })();
