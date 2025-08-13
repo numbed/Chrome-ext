@@ -1,6 +1,6 @@
 (function () {
     // Prompt the user to enter auction CSV data
-    const csvData = prompt("Enter auction CSV", "Кричим,К,29.08.2025,10:30,149733.03,2001,бб/см,1,2.00,3.00,4.00,5.00");
+    const csvData = prompt("Enter auction CSV", "Кричим,К,02.09.2025,10:30,149733.03,2001,бб/см,1,2.00,3.00,4.00,5.00");
     const data = csvData.split(",");
 
 
@@ -75,17 +75,17 @@
     document.getElementById("auctionSecondDueTime").value = firstTime;
     document.getElementById("auctionConfirmSecondDueDateStart").value = getNextWorkday(firstDate) + " " + firstTime;
     document.getElementById("auctionConfirmSecondDueDateEnd").value = getNextWorkday(firstDate) + " " + addMinutes(firstTime);
-    document.getElementById("auctionApplicationsDueDate").value = getPreviousWorkdays(firstDate, 2) + " 23:59:59";
+    document.getElementById("auctionApplicationsDueDate").value = getPreviousWorkdays(firstDate) + " 23:59:59";
 
     // fill prices fields
     startPriceBGN = data[4];
-    console.log('🚀 ~ startPriceBGN: LOADED\n', (startPriceBGN*0.01).toFixed(2));
+    console.log('🚀 ~ startPriceBGN: LOADED\n', (startPriceBGN * 0.01).toFixed(2));
     document.getElementById("auctionStartPrice").value = startPriceBGN;
     document.getElementById("аuctionBidStep").value = (startPriceBGN * 0.01).toFixed(2);
     document.getElementById("аuctionGuarantee").value = calculateGuarantee(startPriceBGN);
     document.getElementsByName("data[startPriceEUR]")[0].value = (startPriceBGN / 1.95583).toFixed(2);
     document.getElementsByName("data[bidStepEUR]")[0].value = ((startPriceBGN * 0.01) / 1.95583).toFixed(2);
-    document.getElementsByName("data[guaranteeEUR]")[0].value = (calculateGuarantee(startPriceBGN)/1.95583).toFixed(2);
+    document.getElementsByName("data[guaranteeEUR]")[0].value = (calculateGuarantee(startPriceBGN) / 1.95583).toFixed(2);
 
     function calculateGuarantee(startPrice) {
         startPrice = parseFloat(startPrice);
@@ -120,26 +120,27 @@
         return `${nextDay}.${nextMonth}.${nextYear}`;
     }
 
-    function getPreviousWorkdays(dateStr, workdaysBack = 2) {
+    function getPreviousWorkdays(dateStr) {
         const [day, month, year] = dateStr.split('.').map(Number);
         const date = new Date(year, month - 1, day);
-        let count = 0;
 
-        while (count < workdaysBack) {
-            date.setDate(date.getDate() - 1);
-            const dayOfWeek = date.getDay();
-            if (dayOfWeek !== 0 && dayOfWeek !== 6) {
-                count++;
-            }
+        const dayOfWeek = date.getDay(); // 0=Sun, 1=Mon, ... 6=Sat
+
+        if (dayOfWeek === 1) {
+            // Monday → go back 4 days (to Thursday)
+            date.setDate(date.getDate() - 4);
+        } else {
+            // Any other weekday → go back exactly 2 days
+            date.setDate(date.getDate() - 2);
         }
 
-        // Format back to DD.MM.YYYY
         const prevDay = String(date.getDate()).padStart(2, '0');
         const prevMonth = String(date.getMonth() + 1).padStart(2, '0');
         const prevYear = date.getFullYear();
 
         return `${prevDay}.${prevMonth}.${prevYear}`;
     }
+
 
     function addMinutes(timeStr) {
         const [hours, minutes] = timeStr.split(':').map(Number);
@@ -161,7 +162,7 @@
 
 
 
-// Fill woods info fields
+    // Fill woods info fields
     const woodNames = [
         "data[woodInfo][number][0]", "data[woodInfo][type][0][]", "data[woodInfo][big][0]",
         "data[woodInfo][mid][0]", "data[woodInfo][small][0]", "data[woodInfo][ozm][0]",
@@ -173,11 +174,11 @@
 
 
     woodNames.forEach((name, index) => {
-        console.log('🚀 ~ index: LOADED\n', name,index + " "+  data[index + 5]);
+        console.log('🚀 ~ index: LOADED\n', name, index + " " + data[index + 5]);
         if (name !== "data[woodInfo][type][0][]") {
             const el = document.getElementsByName(name)[0];
             if (el) el.value = data[index + 5];
-            if (name === "data[woodInfo][total][0]") el.value = woodsTotal.toFixed(20); // Skip wood number field
+            if (name === "data[woodInfo][total][0]") el.value = woodsTotal.toFixed(2); // Skip wood number field
         }
     });
 
@@ -199,7 +200,7 @@
     document.querySelectorAll(".form-group.has-feedback button").forEach(el => el.click());
 
     // Click green save button
-      document.querySelector("button.btn.btn-success").click();
+    document.querySelector("button.btn.btn-success").click();
 
     // After delay, go to next auction ID
     setTimeout(() => {
